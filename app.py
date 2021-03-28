@@ -11,7 +11,7 @@ import pandas as pd
 #################################################
 # Database Setup
 #################################################
-engine = create_engine("postgresql://postgres:Foosyotto1!@localhost:5432/project_2", echo=True)
+engine = create_engine("postgresql://postgres:postgres@localhost:5432/project_2", echo=True)
 
 
 # reflect an existing database into a new model
