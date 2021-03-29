@@ -9,15 +9,16 @@
 
 d3.json("http://127.0.0.1:5000/data").then((importedData) => {
     console.log(importedData);
-    var data1 = importedData
+    var data = importedData
   
 
 
-    var title = data1.title;
-    var rotten_tomatoes = data1.rotten_tomatoes;
+    var title = data[0].imdb;
+    var rotten_tomatoes = data[0].rotten_tomatoes;
 
     console.log(title)
     console.log(rotten_tomatoes)
+    console.log(typeof title)
 //////////////////////////////////////////////////////////////////////////////
     // data.sort(function(a, b) {
     //   return parseFloat(b.No) - parseFloat(a.No);
@@ -28,8 +29,8 @@ d3.json("http://127.0.0.1:5000/data").then((importedData) => {
   
     // Trace1 for the Greek Data
     var trace1 = {
-      y: rotten_tomatoes.map,
-      x: title.map,
+      y: rotten_tomatoes,
+      x: title,
       text: title,
       name: "Emmys",
       type: "bar",
@@ -58,23 +59,8 @@ d3.json("http://127.0.0.1:5000/data").then((importedData) => {
     // data
     var chartData = [trace1]
     
-    //   , trace2, trace3];
-  
-
-///////////////////////////////////////////////////////////////////////////////////////
-    // Apply the group bar mode to the layout
      var layout = {
       title: "Emmy's Won by Rating",
-      // autosize: false,
-      // width: 1000,
-      // height: 1000,
-      // margin: {
-      //   l: 150,
-      //   r: 50,
-      //   b: 50,
-      //   t: 50,
-      //   pad: 4
-      //}
      };
   
     // Render the plot to the div tag with id "plot"

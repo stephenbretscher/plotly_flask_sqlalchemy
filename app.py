@@ -54,21 +54,23 @@ def index():
 def home():
     return render_template("index.html")
 
-
-# @app.route("/data")
-# def plot_data():
-#     query = f"""SELECT * FROM combined_scores"""
-#     conn = engine.connect()
-#     plot_table = pd.read_sql(query, conn)
-#     plot_data = plot_table.to_json(orient="index")
-#     return jsonify(plot_data)
+@app.route("/test")
+def test():
+    return render_template("index2.html")
 
 @app.route("/data")
 def plot_data():
     query = f"""SELECT * FROM combined_scores"""
     conn = engine.connect()
     plot_table = pd.read_sql(query, conn)
-    return Response(plot_table.to_json(orient="columns"), mimetype='application/json')
+    return plot_table.to_json(orient='values')
+
+@app.route("/2")
+def data2():
+    query = f"""SELECT * FROM platforms_whole"""
+    conn = engine.connect()
+    plot_table = pd.read_sql(query, conn)
+    return plot_table.to_json(orient='values')
     
 
 # @app.route("/")
