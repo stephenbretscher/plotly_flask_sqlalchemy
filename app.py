@@ -11,7 +11,7 @@ import pandas as pd
 #################################################
 # Database Setup
 #################################################
-engine = create_engine("postgresql://postgres:postgres@localhost:5432/project_2", echo=True)
+engine = create_engine("postgresql://postgres:Foosyotto1!@localhost:5432/project_2", echo=True)
 
 
 # reflect an existing database into a new model
@@ -63,7 +63,7 @@ def plot_data():
     query = f"""SELECT * FROM combined_scores"""
     conn = engine.connect()
     plot_table = pd.read_sql(query, conn)
-    return plot_table.to_json(orient='values')
+    return Response(plot_table.to_json(orient='values'), mimetype='application/json')
 
 @app.route("/2")
 def data2():

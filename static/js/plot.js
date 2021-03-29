@@ -10,15 +10,41 @@
 d3.json("http://127.0.0.1:5000/data").then((importedData) => {
     console.log(importedData);
     var data = importedData
-  
+    var title_test = data[0][1];
+    var rotten_tomatoes_test = data[0][5];
 
 
-    var title = data[0].imdb;
-    var rotten_tomatoes = data[0].rotten_tomatoes;
 
-    console.log(title)
-    console.log(rotten_tomatoes)
+    console.log(title_test)
+    console.log(rotten_tomatoes_test)
     console.log(typeof title)
+
+   
+    title = []
+    rotten_tomatoes = []
+    imdb = []
+    awards = []
+
+    for (i = 0; i < data.length; i++) {
+      var title_point = data[i][1]
+      title.push(title_point)
+
+      var tomato_point = data[i][5]
+      rotten_tomatoes.push(tomato_point)
+
+      var imdb_point = data[i][4]
+      imdb.push(imdb_point)
+
+      var award_point = data[i][3]
+      awards.push(award_point)
+
+    };
+
+      console.log(title)
+      console.log(rotten_tomatoes)
+
+
+
 //////////////////////////////////////////////////////////////////////////////
     // data.sort(function(a, b) {
     //   return parseFloat(b.No) - parseFloat(a.No);
@@ -29,38 +55,38 @@ d3.json("http://127.0.0.1:5000/data").then((importedData) => {
   
     // Trace1 for the Greek Data
     var trace1 = {
-      y: rotten_tomatoes,
-      x: title,
+      y: title.slice(0,10),
+      x: rotten_tomatoes.slice(0,10),
       text: title,
-      name: "Emmys",
+      name: "Rotten Tomatoes Score",
       type: "bar",
       orientation: "h"
     };
 
-    console.log("checkpoint1")
-    // var trace1 = {
-    //     x: data.map(row => row.rotten_tomatoes).slice(0,10),
-    //     y: data.map(row => row.title).slice(0,10),
-    //     text: data.map(row => row.rotten_tomatoes),
-    //     name: "Rotten Tomato Score",
-    //     type: "bar",
-    //     orientation: "h"
-    //   };
+    var trace2 = {
+      y: title.slice(0,10),
+      x: awards.slice(0,10),
+      text: title,
+      name: "Emmy's",
+      type: "bar",
+      orientation: "h"
+    };
 
-    //   var trace3 = {
-    //     x: data.map(row => row.imdb).slice(0,10),
-    //     y: data.map(row => row.title).slice(0,10),
-    //     text: data.map(row => row.imdb),
-    //     name: "IMDb Score",
-    //     type: "bar",
-    //     orientation: "h"
-    //   };
+    var trace3 = {
+        x: imdb.slice(0,10),
+        y: title.slice(0,10),
+        text: data.map(row => row.imdb),
+        name: "IMDb Score",
+        type: "bar",
+        orientation: "h"
+    };
   
-    // data
-    var chartData = [trace1]
+    
+    var chartData = [trace1, trace2, trace3]
     
      var layout = {
-      title: "Emmy's Won by Rating",
+      title: "Emmy Awards by Rating",
+      yaxis: {automargin: true}
      };
   
     // Render the plot to the div tag with id "plot"
