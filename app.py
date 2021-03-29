@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, render_template
+from flask import Flask, jsonify, render_template, Response
 import numpy as np
 import sqlalchemy
 from sqlalchemy.ext.automap import automap_base
@@ -55,15 +55,20 @@ def home():
     return render_template("index.html")
 
 
+# @app.route("/data")
+# def plot_data():
+#     query = f"""SELECT * FROM combined_scores"""
+#     conn = engine.connect()
+#     plot_table = pd.read_sql(query, conn)
+#     plot_data = plot_table.to_json(orient="index")
+#     return jsonify(plot_data)
+
 @app.route("/data")
 def plot_data():
     query = f"""SELECT * FROM combined_scores"""
     conn = engine.connect()
     plot_table = pd.read_sql(query, conn)
-    plot_data = plot_table.to_json(orient="values")
-    return jsonify(plot_data)
-
-
+    return Response(plot_table.to_json(orient="columns"), mimetype='application/json')
     
 
 # @app.route("/")
